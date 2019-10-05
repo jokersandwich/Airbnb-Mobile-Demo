@@ -1,8 +1,12 @@
 import React from 'react';
+import GlobalStyle from './style';
 
 function App() {
   return (
-    <div>Airbnb mobile demo</div>
+    <div>
+      <GlobalStyle />
+      <div>Airbnb mobile demo</div>
+    </div>
   );
 }
 
