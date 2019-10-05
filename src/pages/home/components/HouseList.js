@@ -13,12 +13,12 @@ const HouseList = (props) => {
                             <p className='feature'>{item.feature}</p>
                             <p className='title'>{item.title}</p>
                             <p className='price'>
-                                <span className='price-new'>{item.priceNew}</span>
-                                <span className='price-old'>{item.priceOld}</span>
+                                <span className='price-new'>{item.price.priceNew}</span>
+                                <span className='price-old'>{item.price.priceOld}</span>
                                 每晚
                             </p>
                             <div>
-                                <span className='comment'>{item.comment}</span>
+                                <span className='comment'>{item.rating}星 · {item.comment}人</span>
                             </div>
                         </HouseItem>
                     )

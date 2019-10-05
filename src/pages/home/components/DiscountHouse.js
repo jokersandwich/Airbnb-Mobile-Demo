@@ -18,6 +18,7 @@ class DiscountHouse extends Component {
                 priceNew: '￥185',
                 priceOld: '￥218',
             },
+            rating: 5,
             comment: 14
         }]
         return (
