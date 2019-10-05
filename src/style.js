@@ -49,8 +49,30 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-div {
+
+
+
+/* 全局样式 */
+*, *:before, *:after, hr, hr:before, hr:after, input[type="search"], input[type="search"]:before, input[type="search"]:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
+}
+body {
+	background-color: #fff;
+    color: #484848;
+    font-family: Circular, "PingFang-SC";
+    font-size: 14px;
+    line-height: 1.43;
+    margin: 0;
+    padding: 0;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(196, 196, 196, 0.2);
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
 }
 `;
 
