@@ -8,9 +8,9 @@ const HouseList = (props) => {
                 props.list.map((item) => {
                     return (
                         <HouseItem key={item.title}>
-                            <div className='img' style={{backgroundImage: item.imgUrl}}></div>
-                            <div className='tag'>{item.tag}</div>
-                            <p className='feature'>{item.feature}</p>
+                            <div className='img' style={{backgroundImage: 'url(' + item.imgUrl + ')'}}></div>
+                            {item.tag ? <div className='tag'>新房源</div> : null}
+                            <p className='feature' style={{color: item.featureColor}}>{item.feature} · {item.bedrooms}室{item.bathrooms}卫{item.beds}床</p>
                             <p className='title'>{item.title}</p>
                             <p className='price'>
                                 <span className='price-new'>{item.price.priceNew}</span>
@@ -43,7 +43,6 @@ export const HouseItem = styled.div`
         padding-top: 66.7%;
         width: 100%;
         background-color: #eee;
-        background-image: url('https://z1.muscache.cn/im/pictures/7f3ea237-27cf-40bd-8ab5-0a634b0ead1e.jpg?aki_policy=large');
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
@@ -71,7 +70,6 @@ export const HouseItem = styled.div`
         overflow: hidden;
         font-size: 10px;
         font-weight: bold;
-        color: #572533;
         word-break: break-all;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;

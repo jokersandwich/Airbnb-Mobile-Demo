@@ -1,19 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import DiscountHouse from './components/DiscountHouse';
+import { actionCreator } from './store';
 import {
     Banner,
     Content
 } from './style';
 
-const Home = () => {
-    return (
-        <>
-            <Banner></Banner>
-            <Content>
-                <DiscountHouse></DiscountHouse>
-            </Content>
-        </>
-    )
+class Home extends Component {
+    render() {
+        return (
+            <>
+                <Banner></Banner>
+                <Content>
+                    <DiscountHouse></DiscountHouse>
+                </Content>
+            </>
+        )
+    }
+
+    componentDidMount() {
+        this.props.getHomeData();
+    }
 }
 
-export default Home;
+const mapDispatchToProps = (dispatch) => ({
+    getHomeData() {
+        dispatch(actionCreator.getHomeDataSync())
+    }
+})
+
+export default connect(null, mapDispatchToProps)(Home);

@@ -1,35 +1,84 @@
 import React, { Component } from 'react';
-// ↓ 这几个公用组件考虑移到common文件夹里（如果接口不能拆分成多个，都在index处理数据，就不用移动了）
-import Section from './Section';
-import Title from './Title';
-import TabList from './TabList';
-import HouseList from './HouseList';
-import More from './More';
+import { connect } from 'react-redux';
+import Section from './common/Section';
+import Title from './common/Title';
+import TabList from './common/TabList';
+import HouseList from './common/HouseList';
+import More from './common/More';
 
 class DiscountHouse extends Component {
+
+    getSectionContent() {
+        const { discount, discountCity } = this.props;
+        
+        if (JSON.stringify(discount) !== '{}') {
+            const { title, subtitle, hot_destinations_metadata, listings } = discount.toJS();
+            const text = hot_destinations_metadata[0].see_all_info.title
+            const tagList = [];
+            const houseList = [];
+            
+            hot_destinations_metadata.map((item) => {
+                tagList.push(item.name);
+                return null;
+            })
+
+            hot_destinations_metadata.map((city) => {
+                if (city.name === discountCity) {
+                    city.home_ids.map((house) => {
+                        listings.map((item) => {
+                            if (item.listing.id.toString() === house) {
+                                const houseItem = {
+                                    title: item.listing.name || '',
+                                    imgUrl: item.listing.picture_url || '',
+                                    tag: item.listing.is_new_listing || false,
+                                    feature: item.listing.space_type || '',
+                                    featureColor: item.listing.scrim_color || '#572533',
+                                    bedrooms: item.listing.bedrooms || 0,
+                                    bathrooms: item.listing.bathrooms || 0,
+                                    beds: item.listing.beds || 0,
+                                    price: {
+                                        priceNew: item.pricing_quote.price_string || '',
+                                        priceOld: item.pricing_quote.rate_without_discount.amount_formatted || '',
+                                    },
+                                    rating: item.listing.star_rating || 5,
+                                    comment: item.listing.reviews_count || 0
+                                };
+                                houseList.push(houseItem);
+                            }
+                            return null;
+                        })
+                        return null;
+                    })
+                }
+                return null;
+            })
+
+            return (
+                <Section>
+                    <Title title={title} subtitle={subtitle}></Title>
+                    <TabList list={tagList} active={discountCity}></TabList>
+                    <HouseList list={houseList}></HouseList>
+                    <More  text={text}></More>
+                </Section>
+            )
+        } else {
+            return null;
+        }
+
+    }
+    
     render() {
-        const tagList = ['成都', '重庆']
-        const houseList = [{
-            imgUrl: 'https://z1.muscache.cn/im/pictures/7f3ea237-27cf-40bd-8ab5-0a634b0ead1e.jpg?aki_policy=large',
-            tag: '新房源',
-            feature: '整套公寓 · 1室1卫1床',
-            title: '「蔚然·小筑」近春熙路太古里／地铁口高档公寓／100寸投影／马歇尔蓝牙音箱',
-            price: {
-                priceNew: '￥185',
-                priceOld: '￥218',
-            },
-            rating: 5,
-            comment: 14
-        }]
         return (
-            <Section>
-                <Title title='秋季特惠房源' subtitle='低至 8 折，可叠加使用礼券'></Title>
-                <TabList list={tagList} active='成都'></TabList>
-                <HouseList list={houseList}></HouseList>
-                <More  text='显示更多成都的房源'></More>
-            </Section>
+            <>
+                {this.getSectionContent()}
+            </>
         )
     }
 }
 
-export default DiscountHouse;
+const mapStateToProps = (state) => ({
+    discount: state.getIn(['home', 'discount']),
+    discountCity: state.getIn(['home', 'discountCity'])
+})
+
+export default connect(mapStateToProps)(DiscountHouse);
