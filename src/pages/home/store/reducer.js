@@ -22,6 +22,8 @@ export default (state = defaultState, action) => {
                 story: action.story,
                 experience: action.experience
             })
+        case constants.CHANGE_DISCOUNT_CITY:
+            return state.set('discountCity', action.city)
         default:
             return state;
     }

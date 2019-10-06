@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { actionCreators } from '../../store';
 
-const TabList = (props) => {
-    const { list, active } = props
-    return (
-        <TabListWrap>
-            {
-                list.map((item, index) => {
-                    return (
-                        <TabItem key={index}>
-                            <div className={ item === active ? 'button active' : 'button'}>{item}</div>
-                        </TabItem>
-                    )
-                })
-            }
-        </TabListWrap>
-    )
+class TabList extends Component {
+    render() {
+        const { list, active, changeDiscountCity } = this.props
+
+        return (
+            <TabListWrap>
+                {
+                    list.map((item) => {
+                        return (
+                            <TabItem key={item}>
+                                <div
+                                    className={ item === active ? 'button active' : 'button'}
+                                    onClick={() => changeDiscountCity(item)}
+                                >{item}</div>
+                            </TabItem>
+                        )
+                    })
+                }
+            </TabListWrap>
+        )
+    }
 }
+
+const mapDispatchToPorps = (dispatch) => ({
+    changeDiscountCity(city) {
+        dispatch(actionCreators.changeDiscountCity(city))
+    }
+})
 
 export const TabListWrap = styled.div`
     margin: 0 -24px 8px;
@@ -32,6 +46,10 @@ export const TabItem = styled.div`
 
     &:first-child {
         padding-left: 24px;
+    }
+
+    &:last-child {
+        padding-right: 24px;
     }
 
     .button {
@@ -57,4 +75,4 @@ export const TabItem = styled.div`
     }
 `;
 
-export default TabList;
+export default connect(null, mapDispatchToPorps)(TabList);

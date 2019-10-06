@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DiscountHouse from './components/DiscountHouse';
-import { actionCreator } from './store';
+import { actionCreators } from './store';
 import {
     Banner,
     Content
@@ -26,7 +26,7 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
     getHomeData() {
-        dispatch(actionCreator.getHomeDataSync())
+        dispatch(actionCreators.getHomeDataSync())
     }
 })
 

@@ -9,7 +9,7 @@ const getHomeData = (data) => ({
     house: fromJS(data.house),
     story: fromJS(data.story),
     experience: fromJS(data.experience)
-})
+});
 
 export const  getHomeDataSync = () => {
     return (dispatch) => {
@@ -23,3 +23,8 @@ export const  getHomeDataSync = () => {
             })
     }
 };
+
+export const changeDiscountCity = (city) => ({
+    type: constants.CHANGE_DISCOUNT_CITY,
+    city
+});
