@@ -40,7 +40,6 @@ export const ExperienceItem = styled.div`
         background-color: #eee;
         background-position: center;
         background-size: cover;
-        background-repeat: no-repeat;
     }
 
     .tag {
