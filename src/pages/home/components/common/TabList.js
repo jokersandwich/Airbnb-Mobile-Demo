@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { actionCreators } from '../../store';
 
 class TabList extends Component {
     render() {
-        const { list, active, changeDiscountCity } = this.props
+        const { list, active, onTap } = this.props
 
         return (
             <TabListWrap>
@@ -15,7 +13,7 @@ class TabList extends Component {
                             <TabItem key={item}>
                                 <div
                                     className={ item === active ? 'button active' : 'button'}
-                                    onClick={() => changeDiscountCity(item)}
+                                    onClick={() => onTap(item)}
                                 >{item}</div>
                             </TabItem>
                         )
@@ -25,12 +23,6 @@ class TabList extends Component {
         )
     }
 }
-
-const mapDispatchToPorps = (dispatch) => ({
-    changeDiscountCity(city) {
-        dispatch(actionCreators.changeDiscountCity(city))
-    }
-})
 
 export const TabListWrap = styled.div`
     margin: 0 -24px 8px;
@@ -75,4 +67,4 @@ export const TabItem = styled.div`
     }
 `;
 
-export default connect(null, mapDispatchToPorps)(TabList);
+export default TabList;

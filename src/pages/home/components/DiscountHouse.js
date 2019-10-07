@@ -5,11 +5,12 @@ import Title from './common/Title';
 import TabList from './common/TabList';
 import HouseList from './common/HouseList';
 import More from './common/More';
+import { actionCreators } from '../store';
 
 class DiscountHouse extends Component {
 
     getSectionContent() {
-        const { discount, discountCity } = this.props;
+        const { discount, discountCity, changeDiscountCity } = this.props;
         
         if (JSON.stringify(discount) !== '{}') {
             const { title, subtitle, hot_destinations_metadata, listings } = discount.toJS();
@@ -32,7 +33,7 @@ class DiscountHouse extends Component {
                                     imgUrl: item.listing.picture_url || '',
                                     tag: item.listing.is_new_listing || false,
                                     feature: item.listing.space_type || '',
-                                    featureColor: item.listing.scrim_color || '#572533',
+                                    featureColor: item.listing.scrim_color || '#555',
                                     bedrooms: item.listing.bedrooms || 0,
                                     bathrooms: item.listing.bathrooms || 0,
                                     beds: item.listing.beds || 0,
@@ -56,7 +57,7 @@ class DiscountHouse extends Component {
             return (
                 <Section>
                     <Title title={title} subtitle={subtitle}></Title>
-                    <TabList list={tagList} active={discountCity}></TabList>
+                    <TabList list={tagList} active={discountCity} onTap={city => {changeDiscountCity(city)}}></TabList>
                     <HouseList list={houseList}></HouseList>
                     <More  text={text}></More>
                 </Section>
@@ -81,4 +82,10 @@ const mapStateToProps = (state) => ({
     discountCity: state.getIn(['home', 'discountCity'])
 })
 
-export default connect(mapStateToProps)(DiscountHouse);
+const mapDispatchToPorps = (dispatch) => ({
+    changeDiscountCity(city) {
+        dispatch(actionCreators.changeDiscountCity(city))
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToPorps)(DiscountHouse);
