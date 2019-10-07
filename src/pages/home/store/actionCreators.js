@@ -28,3 +28,8 @@ export const changeDiscountCity = (city) => ({
     type: constants.CHANGE_DISCOUNT_CITY,
     city
 });
+
+export const changeHotCity = (city) => ({
+    type: constants.CHANGE_HOT_CITY,
+    city
+});

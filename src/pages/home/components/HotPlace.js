@@ -7,16 +7,16 @@ import HouseList from './common/HouseList';
 import More from './common/More';
 import { actionCreators } from '../store';
 
-class DiscountHouse extends Component {
+class HotPlace extends Component {
 
     getSectionContent() {
-        const { discount, discountCity, changeDiscountCity } = this.props;
+        const { hot, hotCity, changeHotCity } = this.props;
         
-        if (JSON.stringify(discount) !== '{}') {
-            const { title, subtitle, hot_destinations_metadata, listings } = discount.toJS();
+        if (JSON.stringify(hot) !== '{}') {
+            const { title, subtitle, hot_destinations_metadata, listings } = hot.toJS();
 
             const selectedCity = hot_destinations_metadata.find((item) => {
-                return item.name === discountCity
+                return item.name === hotCity
             })
             
             const text = selectedCity.see_all_info.title
@@ -48,9 +48,9 @@ class DiscountHouse extends Component {
             return (
                 <Section>
                     <Title title={title} subtitle={subtitle}></Title>
-                    <TabList list={tagList} active={discountCity} onTap={city => {changeDiscountCity(city)}}></TabList>
+                    <TabList list={tagList} active={hotCity} onTap={city => {changeHotCity(city)}}></TabList>
                     <HouseList list={houseList}></HouseList>
-                    <More  text={text}></More>
+                    <More text={text}></More>
                 </Section>
             )
         } else {
@@ -69,14 +69,14 @@ class DiscountHouse extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    discount: state.getIn(['home', 'discount']),
-    discountCity: state.getIn(['home', 'discountCity'])
+    hot: state.getIn(['home', 'hot']),
+    hotCity: state.getIn(['home', 'hotCity'])
 })
 
 const mapDispatchToPorps = (dispatch) => ({
-    changeDiscountCity(city) {
-        dispatch(actionCreators.changeDiscountCity(city))
+    changeHotCity(city) {
+        dispatch(actionCreators.changeHotCity(city))
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToPorps)(DiscountHouse);
+export default connect(mapStateToProps, mapDispatchToPorps)(HotPlace);

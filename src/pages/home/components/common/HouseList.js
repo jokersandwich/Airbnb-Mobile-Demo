@@ -12,11 +12,17 @@ const HouseList = (props) => {
                             {item.tag ? <div className='tag'>新房源</div> : null}
                             <p className='feature' style={{color: item.featureColor}}>{item.feature} · {item.bedrooms}室{item.bathrooms}卫{item.beds}床</p>
                             <p className='title'>{item.title}</p>
-                            <p className='price'>
-                                <span className='price-new'>{item.price.priceNew}</span>
-                                <span className='price-old'>{item.price.priceOld}</span>
-                                每晚
-                            </p>
+                            {
+                                typeof item.price === 'string' ? (
+                                    <p className='price'>每晚{item.price}</p>
+                                ) : (
+                                    <p className='price'>
+                                        <span className='price-new'>{item.price.priceNew}</span>
+                                        <span className='price-old'>{item.price.priceOld}</span>
+                                        每晚
+                                    </p>
+                                )
+                            }
                             <div>
                                 <span className='comment'>{item.rating}星 · {item.comment}人</span>
                             </div>
