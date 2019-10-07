@@ -1,46 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const HouseList = (props) => {
+const ExperienceList = (props) => {
     return (
-        <HouseListWrap>
+        <ExperienceListWrap>
             {
                 props.list.map((item) => {
                     return (
-                        <HouseItem key={item.title}>
+                        <ExperienceItem key={item.title}>
                             <div className='img' style={{backgroundImage: 'url(' + item.imgUrl + ')'}}></div>
-                            {item.tag ? <div className='tag'>新房源</div> : null}
-                            <p className='feature' style={{color: item.featureColor}}>{item.feature} · {item.bedrooms}室{item.bathrooms}卫{item.beds}床</p>
+                            <p className='feature' style={{color: item.featureColor}}>{item.feature}</p>
                             <p className='title'>{item.title}</p>
-                            {
-                                typeof item.price === 'string' ? (
-                                    <p className='price'>每晚{item.price}</p>
-                                ) : (
-                                    <p className='price'>
-                                        <span className='price-new'>{item.price.priceNew}</span>
-                                        <span className='price-old'>{item.price.priceOld}</span>
-                                        每晚
-                                    </p>
-                                )
-                            }
+                            <p className='price'>每人{item.price}</p>
                             <div>
                                 <span className='comment'>{item.rating}星 · {item.comment}人</span>
                             </div>
-                        </HouseItem>
+                        </ExperienceItem>
                     )
                 })
             }
-        </HouseListWrap>
+        </ExperienceListWrap>
     )
 }
 
-export const HouseListWrap = styled.div`
+export const ExperienceListWrap = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 `;
 
-export const HouseItem = styled.div`
+export const ExperienceItem = styled.div`
     position: relative;
     margin-bottom: 24px;
     width: calc(50% - 4px);
@@ -50,7 +39,7 @@ export const HouseItem = styled.div`
         width: 100%;
         background-color: #eee;
         background-position: center;
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
     }
 
@@ -122,4 +111,4 @@ export const HouseItem = styled.div`
     }
 `;
 
-export default HouseList;
+export default ExperienceList;

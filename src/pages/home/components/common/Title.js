@@ -19,7 +19,7 @@ const TitleWrap = styled.div`
         font-weight: bold;
     }
 
-    .sub-title {
+    .subtitle {
         line-height: 19px;
         font-size: 13px;
     }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DiscountHouse from './components/DiscountHouse';
 import HotPlace from './components/HotPlace';
 import House from './components/House';
+import Experience from './components/Experience';
 import { actionCreators } from './store';
 import {
     Banner,
@@ -18,6 +19,7 @@ class Home extends Component {
                     <DiscountHouse></DiscountHouse>
                     <HotPlace></HotPlace>
                     <House></House>
+                    <Experience></Experience>
                 </Content>
             </>
         )

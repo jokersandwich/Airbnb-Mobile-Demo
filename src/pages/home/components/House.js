@@ -11,7 +11,7 @@ class House extends Component {
         const { house } = this.props;
         
         if (JSON.stringify(house) !== '{}') {
-            const { title, subtitle, listings } = house.toJS();
+            const { listings } = house.toJS();
 
             const houseList = listings.slice(0, 4).map((item) => {
                 return {
