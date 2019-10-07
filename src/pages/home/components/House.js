@@ -15,6 +15,7 @@ class House extends Component {
 
             const houseList = listings.slice(0, 4).map((item) => {
                 return {
+                    id: item.listing.id,
                     title: item.listing.name || '',
                     imgUrl: item.listing.picture_url || '',
                     tag: item.listing.is_new_listing || false,

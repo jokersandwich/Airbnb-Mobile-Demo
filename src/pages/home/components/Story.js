@@ -15,6 +15,7 @@ class Story extends Component {
 
             const storyList = stories.slice(0, 4).map((item) => {
                 return {
+                    id: item.id,
                     title: item.title || '',
                     imgUrl: item.cover_image_url || '',
                     tag: item.article_category || '',

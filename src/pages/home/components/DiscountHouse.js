@@ -31,6 +31,7 @@ class DiscountHouse extends Component {
                 })
             }).map((item) => {
                 return {
+                    id: item.listing.id,
                     title: item.listing.name || '',
                     imgUrl: item.listing.picture_url || '',
                     tag: item.listing.is_new_listing || false,

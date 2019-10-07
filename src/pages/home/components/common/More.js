@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const More = props => <MoreWrap>{props.text}</MoreWrap>;
+const More = props => (
+    <Link to='/list'>
+        <MoreWrap>{props.text}</MoreWrap>
+    </Link>
+);
 
 export const MoreWrap = styled.div`
     padding: 6px 15px;

@@ -15,6 +15,7 @@ class Experience extends Component {
 
             const experienceList = trip_templates.slice(0, 4).map((item) => {
                 return {
+                    id: item.id,
                     title: item.title || '',
                     imgUrl: item.picture.picture || '',
                     feature: item.kicker_text || '',

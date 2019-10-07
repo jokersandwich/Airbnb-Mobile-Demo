@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const ExperienceList = (props) => {
     return (
@@ -8,13 +9,15 @@ const ExperienceList = (props) => {
                 props.list.map((item) => {
                     return (
                         <ExperienceItem key={item.title}>
-                            <div className='img' style={{backgroundImage: 'url(' + item.imgUrl + ')'}}></div>
-                            <p className='feature' style={{color: item.featureColor}}>{item.feature}</p>
-                            <p className='title'>{item.title}</p>
-                            <p className='price'>每人{item.price}</p>
-                            <div>
-                                <span className='comment'>{item.rating}星 · {item.comment}人</span>
-                            </div>
+                            <Link to={'/detail/' + item.id}>
+                                <div className='img' style={{backgroundImage: 'url(' + item.imgUrl + ')'}}></div>
+                                <p className='feature' style={{color: item.featureColor}}>{item.feature}</p>
+                                <p className='title'>{item.title}</p>
+                                <p className='price'>每人{item.price}</p>
+                                <div>
+                                    <span className='comment'>{item.rating}星 · {item.comment}人</span>
+                                </div>
+                            </Link>
                         </ExperienceItem>
                     )
                 })

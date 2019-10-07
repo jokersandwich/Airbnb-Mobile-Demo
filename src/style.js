@@ -53,11 +53,6 @@ table {
 
 
 /* 全局样式 */
-*, *:before, *:after, hr, hr:before, hr:after, input[type="search"], input[type="search"]:before, input[type="search"]:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
 body {
 	background-color: #fff;
     color: #484848;
@@ -73,6 +68,15 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
+}
+*, *:before, *:after, hr, hr:before, hr:after, input[type="search"], input[type="search"]:before, input[type="search"]:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+    color: inherit;
 }
 `;
 
