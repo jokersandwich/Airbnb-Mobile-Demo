@@ -10,7 +10,7 @@ import { actionCreators } from '../store';
 class HotPlace extends Component {
 
     getSectionContent() {
-        const { hot, hotCity, changeHotCity } = this.props;
+        const { hot, hotCity, changeHotCity, changeLikeHouse } = this.props;
         
         if (JSON.stringify(hot) !== '{}') {
             const { title, subtitle, hot_destinations_metadata, listings } = hot.toJS();
@@ -35,6 +35,7 @@ class HotPlace extends Component {
                     title: item.listing.name || '',
                     imgUrl: item.listing.picture_url || '',
                     tag: item.listing.is_new_listing || false,
+                    like: item.listing.like || false,
                     feature: item.listing.space_type || '',
                     featureColor: item.listing.scrim_color || '#555',
                     bedrooms: item.listing.bedrooms || 0,
@@ -50,7 +51,7 @@ class HotPlace extends Component {
                 <Section>
                     <Title title={title} subtitle={subtitle}></Title>
                     <TabList list={tagList} active={hotCity} onTap={city => {changeHotCity(city)}}></TabList>
-                    <HouseList list={houseList}></HouseList>
+                    <HouseList list={houseList} onLike={(e, id) => changeLikeHouse(e, id)}></HouseList>
                     <More text={text}></More>
                 </Section>
             )
@@ -77,6 +78,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToPorps = (dispatch) => ({
     changeHotCity(city) {
         dispatch(actionCreators.changeHotCity(city))
+    },
+    changeLikeHouse(e, id) {
+        const houseType = 'hot';
+        e.preventDefault();
+        dispatch(actionCreators.changeLikeHouse(houseType, id));
     }
 })
 

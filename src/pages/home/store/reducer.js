@@ -4,6 +4,7 @@ import * as constants from './constants';
 const defaultState = fromJS({
     discountCity: '',
     hotCity: '',
+    wishList: [],
     discount: {},
     hot: {},
     house: {},
@@ -27,6 +28,25 @@ export default (state = defaultState, action) => {
             return state.set('discountCity', action.city)
         case constants.CHANGE_HOT_CITY:
             return state.set('hotCity', action.city)
+        case constants.CHANGE_LIKE_HOUSE:
+            const listings = state.getIn([action.houseType, 'listings']).toJS();
+            const houseIndex = listings.findIndex((house) => {
+                return house.listing.id === action.id
+            });
+            const house = listings[houseIndex];
+            const newlikeState = !house.listing.like;
+            let wishList = state.get('wishList').toJS();
+
+            if (newlikeState) {
+                wishList.push(house)
+            } else {
+                wishList = wishList.filter((item) => {
+                    return item.listing.id !== action.id
+                })
+            }
+
+            console.log('心愿单', wishList)
+            return state.setIn([action.houseType, 'listings', houseIndex, 'listing', 'like'], newlikeState).set('wishList', fromJS(wishList))
         default:
             return state;
     }

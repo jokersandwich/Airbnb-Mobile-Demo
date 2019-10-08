@@ -1,40 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const HouseList = (props) => {
-    return (
-        <HouseListWrap>
-            {
-                props.list.map((item) => {
-                    return (
-                        <HouseItem key={item.title}>
-                            <Link to={'/detail/' + item.id}>
-                                <div className='img' style={{backgroundImage: 'url(' + item.imgUrl + ')'}}></div>
-                                {item.tag ? <div className='tag'>新房源</div> : null}
-                                <p className='feature' style={{color: item.featureColor}}>{item.feature} · {item.bedrooms}室{item.bathrooms}卫{item.beds}床</p>
-                                <p className='title'>{item.title}</p>
-                                {
-                                    typeof item.price === 'string' ? (
-                                        <p className='price'>每晚{item.price}</p>
-                                    ) : (
-                                        <p className='price'>
-                                            <span className='price-new'>{item.price.priceNew}</span>
-                                            <span className='price-old'>{item.price.priceOld}</span>
-                                            每晚
-                                        </p>
-                                    )
-                                }
-                                <div>
-                                    <span className='comment'>{item.rating}星 · {item.comment}人</span>
-                                </div>
-                            </Link>
-                        </HouseItem>
-                    )
-                })
-            }
-        </HouseListWrap>
-    )
+class HouseList extends Component {
+
+    render() {
+        const { list, onLike } = this.props;
+        return (
+            <HouseListWrap>
+                {
+                    list.map((item) => {
+                        return (
+                            <HouseItem key={item.title}>
+                                <Link to={'/detail/' + item.id}>
+                                    <div className='img' style={{backgroundImage: 'url(' + item.imgUrl + ')'}}></div>
+                                    {item.tag ? <div className='tag'>新房源</div> : null}
+                                    <div className='like'>
+                                    <svg
+                                        onClick={(e) => onLike(e, item.id)}
+                                        fill={item.like ? "#FF5A5F" : "#484848"}
+                                        fillOpacity={item.like ? "1" : "0.5"}
+                                        viewBox="0 0 24 24" stroke="#ffffff" strokeWidth="2" focusable="false" aria-label="保存此体验" role="img" strokeLinecap="round" strokeLinejoin="round" style={{height: '20px', width: '20px', display: 'block', overflow: 'visible'}}
+                                    >
+                                        <path d="m17.5 2.9c-2.1 0-4.1 1.3-5.4 2.8-1.6-1.6-3.8-3.2-6.2-2.7-1.5.2-2.9 1.2-3.6 2.6-2.3 4.1 1 8.3 3.9 11.1 1.4 1.3 2.8 2.5 4.3 3.6.4.3 1.1.9 1.6.9s1.2-.6 1.6-.9c3.2-2.3 6.6-5.1 8.2-8.8 1.5-3.4 0-8.6-4.4-8.6" strokeLinejoin="round"></path>
+                                    </svg>
+                                    </div>
+                                    <p className='feature' style={{color: item.featureColor}}>{item.feature} · {item.bedrooms}室{item.bathrooms}卫{item.beds}床</p>
+                                    <p className='title'>{item.title}</p>
+                                    {
+                                        typeof item.price === 'string' ? (
+                                            <p className='price'>每晚{item.price}</p>
+                                        ) : (
+                                            <p className='price'>
+                                                <span className='price-new'>{item.price.priceNew}</span>
+                                                <span className='price-old'>{item.price.priceOld}</span>
+                                                每晚
+                                            </p>
+                                        )
+                                    }
+                                    <div>
+                                        <span className='comment'>{item.rating}星 · {item.comment}人</span>
+                                    </div>
+                                </Link>
+                            </HouseItem>
+                        )
+                    })
+                }
+            </HouseListWrap>
+        )
+    }
 }
 
 export const HouseListWrap = styled.div`
@@ -68,6 +82,13 @@ export const HouseItem = styled.div`
         color: #484848;
         font-size: 10px;
         font-weight: bold;
+    }
+
+    .like {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 8px;
     }
 
     .feature {

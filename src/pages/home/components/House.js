@@ -4,11 +4,12 @@ import Section from './common/Section';
 import Title from './common/Title';
 import HouseList from './common/HouseList';
 import More from './common/More';
+import { actionCreators } from '../store';
 
 class House extends Component {
 
     getSectionContent() {
-        const { house } = this.props;
+        const { house, changeLikeHouse } = this.props;
         
         if (JSON.stringify(house) !== '{}') {
             const { listings } = house.toJS();
@@ -19,6 +20,7 @@ class House extends Component {
                     title: item.listing.name || '',
                     imgUrl: item.listing.picture_url || '',
                     tag: item.listing.is_new_listing || false,
+                    like: item.listing.like || false,
                     feature: item.listing.space_type || '',
                     featureColor: item.listing.scrim_color || '#555',
                     bedrooms: item.listing.bedrooms || 0,
@@ -33,7 +35,7 @@ class House extends Component {
             return (
                 <Section>
                     <Title title={'全球热门房源精选'} subtitle={'精选舒适房源供你挑选'}></Title>
-                    <HouseList list={houseList}></HouseList>
+                    <HouseList list={houseList} onLike={(e, id) => changeLikeHouse(e, id)}></HouseList>
                     <More text={'查看更多房源'}></More>
                 </Section>
             )
@@ -56,4 +58,12 @@ const mapStateToProps = (state) => ({
     house: state.getIn(['home', 'house'])
 })
 
-export default connect(mapStateToProps, null)(House);
+const mapDispatchToPorps = (dispatch) => ({
+    changeLikeHouse(e, id) {
+        const houseType = 'house';
+        e.preventDefault();
+        dispatch(actionCreators.changeLikeHouse(houseType, id));
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToPorps)(House);

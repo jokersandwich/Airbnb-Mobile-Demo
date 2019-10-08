@@ -33,3 +33,9 @@ export const changeHotCity = (city) => ({
     type: constants.CHANGE_HOT_CITY,
     city
 });
+
+export const changeLikeHouse = (houseType, id) => ({
+    type: constants.CHANGE_LIKE_HOUSE,
+    houseType,
+    id
+})

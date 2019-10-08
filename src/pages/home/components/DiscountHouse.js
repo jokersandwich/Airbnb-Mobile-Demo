@@ -10,7 +10,7 @@ import { actionCreators } from '../store';
 class DiscountHouse extends Component {
 
     getSectionContent() {
-        const { discount, discountCity, changeDiscountCity } = this.props;
+        const { discount, discountCity, changeDiscountCity, changeLikeHouse } = this.props;
         
         if (JSON.stringify(discount) !== '{}') {
             const { title, subtitle, hot_destinations_metadata, listings } = discount.toJS();
@@ -35,6 +35,7 @@ class DiscountHouse extends Component {
                     title: item.listing.name || '',
                     imgUrl: item.listing.picture_url || '',
                     tag: item.listing.is_new_listing || false,
+                    like: item.listing.like || false,
                     feature: item.listing.space_type || '',
                     featureColor: item.listing.scrim_color || '#555',
                     bedrooms: item.listing.bedrooms || 0,
@@ -50,7 +51,7 @@ class DiscountHouse extends Component {
                 <Section>
                     <Title title={title} subtitle={subtitle}></Title>
                     <TabList list={tagList} active={discountCity} onTap={city => {changeDiscountCity(city)}}></TabList>
-                    <HouseList list={houseList}></HouseList>
+                    <HouseList list={houseList} onLike={(e, id) => changeLikeHouse(e, id)}></HouseList>
                     <More  text={text}></More>
                 </Section>
             )
@@ -76,7 +77,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToPorps = (dispatch) => ({
     changeDiscountCity(city) {
-        dispatch(actionCreators.changeDiscountCity(city))
+        dispatch(actionCreators.changeDiscountCity(city));
+    },
+    changeLikeHouse(e, id) {
+        const houseType = 'discount';
+        e.preventDefault();
+        dispatch(actionCreators.changeLikeHouse(houseType, id));
     }
 })
 
