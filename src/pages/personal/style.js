@@ -57,5 +57,7 @@ export const GoBack = styled.div`
     bottom: 0;
     padding: 16px 0;
     width: 100%;
+    background: #fff;
     text-align: center;
+    z-index: 10;
 `;

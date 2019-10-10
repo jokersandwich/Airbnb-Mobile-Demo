@@ -40,9 +40,15 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.props.getHomeData();
+        if (!this.props.discountCity) {
+            this.props.getHomeData();
+        }
     }
 }
+
+const mapStateToProps = (state) => ({
+    discountCity: state.getIn(['home', 'discountCity'])
+})
 
 const mapDispatchToProps = (dispatch) => ({
     getHomeData() {
@@ -50,4 +56,4 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -14,7 +14,7 @@ const defaultState = fromJS({
 
 export default (state = defaultState, action) => {
     switch(action.type) {
-        case constants.GET_HOME_DATA:
+        case constants.GET_HOME_DATA:   // 获取首页数据
             return state.merge({
                 discountCity: action.discount.getIn(['hot_destinations_metadata', '0', 'name']),
                 hotCity: action.hot.getIn(['hot_destinations_metadata', '0', 'name']),
@@ -24,17 +24,21 @@ export default (state = defaultState, action) => {
                 story: action.story,
                 experience: action.experience
             })
-        case constants.CHANGE_DISCOUNT_CITY:
+        case constants.CHANGE_DISCOUNT_CITY:    // 选择折扣城市
             return state.set('discountCity', action.city)
-        case constants.CHANGE_HOT_CITY:
+        case constants.CHANGE_HOT_CITY:    // 选择热门城市
             return state.set('hotCity', action.city)
-        case constants.CHANGE_LIKE_HOUSE:
-            const listings = state.getIn([action.houseType, 'listings']).toJS();
+        case constants.CHANGE_LIKE_HOUSE:    // 喜欢房源
+            const houseType = action.houseType
+            const listings = state.getIn([houseType, 'listings']).toJS();
             const houseIndex = listings.findIndex((house) => {
                 return house.listing.id === action.id
             });
             const house = listings[houseIndex];
             const newlikeState = !house.listing.like;
+            house.listing.like = newlikeState;
+            house.listing.houseType = houseType
+
             let wishList = state.get('wishList').toJS();
 
             if (newlikeState) {
