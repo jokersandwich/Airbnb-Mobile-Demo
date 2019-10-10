@@ -26,7 +26,7 @@ class WishList extends Component {
                                     <div className='avatar-wrap'>
                                         <img alt='avatar' className='avatar' width='40' height='40' src={item.avatar} />
                                     </div>
-                                    <div className='feature' style={{color: item.featureColor}}>{item.feature} · {item.beds}}张床</div>
+                                    <div className='feature' style={{color: item.featureColor}}>{item.feature} · {item.beds}张床</div>
                                     <div className='title'>{item.title}</div>
                                     <div className='price'>{item.price}/晚</div>
                                     <div className='comment'>{item.rating}星 · {item.comment}人</div>

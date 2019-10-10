@@ -13,7 +13,7 @@ class Wish extends Component {
     getWishList() {
         const { wishList, changeLikeHouse } = this.props;
 
-        if (JSON.stringify(wishList) !== '{}') {
+        if (JSON.stringify(wishList) !== '[]') {
             const wishListData = wishList.toJS().map((item) => {
                 return {
                     id: item.listing.id,
@@ -37,11 +37,10 @@ class Wish extends Component {
         }
     }
     render() {
-
         return (
             <>
                 <WishWrap>
-                    <Header>1个住处</Header>
+                    <Header>{this.props.wishList.size}个住处</Header>
                     {this.getWishList()}
                 </WishWrap>
                 <GoBack onClick={() => this.props.history.goBack()}>返回</GoBack>
