@@ -15,5 +15,6 @@ $ npm install
 $ npm start
 ```
 
-## 快照
+## 预览
 
+<img src="https://github.com/jokersandwich/Airbnb-Mobile-Demo/blob/master/public/readme/preview.png" width="800">
