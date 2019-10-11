@@ -17,4 +17,4 @@ $ npm start
 
 ## 预览
 
-<img src="https://github.com/jokersandwich/Airbnb-Mobile-Demo/blob/master/public/readme/preview.png" width="800">
+<img src="https://github.com/jokersandwich/Airbnb-Mobile-Demo/blob/master/public/readme/preview.jp" width="800">
